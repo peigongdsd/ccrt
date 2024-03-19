@@ -1,0 +1,15 @@
+[Exec]
+Timezone=copy
+LinkJournal=try-guest
+PrivateUsers=pick
+[Network]
+VirtualEthernet=yes
+Zone=common0
+[Files]
+BindReadOnly=/run/proxy-containers.sock:/run/host/proxy-containers.sock:idmap
+BindReadOnly=/nix/store:/nix/store:idmap
+BindReadOnly=/nix/var/nix/db:/nix/var/nix/db:idmap
+BindReadOnly=/nix/var/nix/daemon-socket:/nix/var/nix/daemon-socket:idmap
+BindReadOnly=/home/krusl/code/ccrt/result/init:/sbin/init:idmap
+BindReadOnly=/home/krusl/code/ccrt/os-release:/etc/os-release:idmap
+PrivateUsersOwnership=map
