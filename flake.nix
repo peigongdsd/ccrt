@@ -7,6 +7,7 @@
       modules = [
         "${nixpkgs}/nixos/modules/profiles/minimal.nix"
 	./nspawn.nix
+	./yggdrasil.nix
       ];
     };
   in {
