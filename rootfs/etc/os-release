@@ -1,0 +1,5 @@
+ANSI_COLOR="1;34"
+ID=ccrt
+LOGO="nix-snowflake"
+NAME=Common Compact Runtime
+

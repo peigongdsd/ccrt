@@ -4,9 +4,8 @@ LinkJournal=try-guest
 PrivateUsers=pick
 [Network]
 VirtualEthernet=yes
-Zone=common0
+Bridge=srvgrp0
 [Files]
-BindReadOnly=/run/proxy-containers.sock:/run/host/proxy-containers.sock:idmap
 BindReadOnly=/nix/store:/nix/store:idmap
 BindReadOnly=/nix/var/nix/db:/nix/var/nix/db:idmap
 BindReadOnly=/nix/var/nix/daemon-socket:/nix/var/nix/daemon-socket:idmap

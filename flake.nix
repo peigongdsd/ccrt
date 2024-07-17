@@ -6,7 +6,6 @@
       system = "x86_64-linux"; 
       modules = [
         "${nixpkgs}/nixos/modules/profiles/minimal.nix"
-        ./configuration.nix
 	./nspawn.nix
       ];
     };

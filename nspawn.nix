@@ -3,26 +3,13 @@
   boot.isContainer = true;
   boot.loader.initScript.enable = true;
   systemd.user.extraConfig = "DefaultEnvironment=PATH=/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin";
-  systemd.sockets.proxy = {
-    partOf = [ "proxy.service" ];
-    wantedBy = [ "multi-user.target" ];
-    socketConfig = {
-      ListenStream = 7890;
-      BindIPv6Only = "both";
-      Accept = false;
-   };
-  };
-  systemd.services.proxy = {
-    serviceConfig = {
-      ExecStart = "${pkgs.systemd}/lib/systemd/systemd-socket-proxyd /run/host/proxy-containers.sock";
-    };
-  };
   networking = {
-    hostName = "ccrt";
+    # Fill in a unique hostname
+    hostName = null;
     useDHCP = false;
     useHostResolvConf = false;
     firewall.enable = false;
-    proxy.default = "http://127.0.0.1:7890/";
+    proxy.default = null;
     proxy.noProxy = "127.0.0.1,localhost,*.cn";
   };
   systemd.network.enable = true;
@@ -33,4 +20,13 @@
   '';
   systemd.sockets.nix-daemon.enable = false;
   systemd.services.nix-daemon.enable = false;
+  
+  environment.systemPackages = with pkgs; [ neovim ];
+  users = {
+    mutableUsers = false;
+    allowNoPasswordLogin = true;
+  };
+  systemd.tmpfiles.rules = [ "f /var/lib/systemd/linger/root" ];
+  system.stateVersion = "23.11";
+
 }
