@@ -4,14 +4,23 @@
   boot.loader.initScript.enable = true;
   systemd.user.extraConfig = "DefaultEnvironment=PATH=/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin";
   networking = {
-    # Fill in a unique hostname
-    hostName = null;
+    hostName = lib.mkDefault null;
     useDHCP = false;
     useHostResolvConf = false;
     firewall.enable = false;
-    proxy.default = null;
+    proxy.default = lib.mkDefault null;
     proxy.noProxy = "127.0.0.1,localhost,*.cn";
   };
+  services.timesyncd = {
+    enable = true;
+    servers = [
+      "0.cn.pool.ntp.org"
+      "1.cn.pool.ntp.org"
+      "2.cn.pool.ntp.org"
+      "3.cn.pool.ntp.org"
+    ];
+  };
+  time.timeZone = "Asia/Shanghai";
   systemd.network.enable = true;
   services.resolved.enable = true;
   nix.extraOptions = ''
